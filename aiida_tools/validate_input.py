@@ -35,10 +35,22 @@ def parameter(name, type=None, required=True):
 def inherit_parameters(workflow, ignore=()):
     def inner(cls):
         _init_params(cls)
-        inherited = getattr(workflow, '_params', dict())
-        cls._params.update(
-            {key: val for key, val in inherited.items() if key not in ignore}
-        )
+        if not hasattr(cls, '_inherited_params'):
+            cls._inherited_params = dict()
+            def inherited_parameters(self, workflow):
+                params = self.get_parameters()
+                return {
+                    key: params[key] for key in
+                    self._inherited_params[workflow] & set(params.keys())
+                }
+            cls.inherited_parameters = inherited_parameters
+
+        inherited = {
+            key: val for key, val in getattr(workflow, '_params', dict()).items()
+            if key not in ignore
+        }
+        cls._params.update(inherited)
+        cls._inherited_params[workflow] = set(inherited.keys())
         return cls
     return inner
 
