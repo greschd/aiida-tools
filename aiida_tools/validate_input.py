@@ -70,6 +70,8 @@ def validate_input(cls):
                     continue
             if not isinstance(r, val.type):
                 raise InputValidationError("Input parameter '{}' is of invalid type '{}'; should be '{}'.".format(name, type(r), val.type))
+        if params:
+            raise InputValidationError("Unknown input parameters {}".format(list(params.keys())))
         self.append_to_report('Input validation passed. Starting workflow with the following parameters:' + ''.join(
             ['\n    {}: {}'.format(key, val) for key, val in sorted(self.get_parameters().items())]
         ))
