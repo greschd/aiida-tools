@@ -3,6 +3,6 @@
 #
 # Author:  Dominik Gresch <greschd@gmx.ch>
 
-from ._version import __version__
+__version__ = '0.0.0a1'
 
-from . import validate_input
+from ._input_validator import get_input_validator 

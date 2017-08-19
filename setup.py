@@ -10,9 +10,11 @@ from setuptools import setup
 
 readme = """Helper tools for AiiDA."""
 
-with open('./aiida_tools/_version.py', 'r') as f:
-    match_expr = "__version__[^'" + '"]+([' + "'" + r'"])([^\1]+)\1'
-    version = re.search(match_expr, f.read()).group(2)
+# Get the version number
+with open('./aiida_tools/__init__.py') as f:
+    match_expr = "__version__[^'\"]+(['\"])([^'\"]+)"
+    version = re.search(match_expr, f.read()).group(2).strip()
+
 
 setup(
     name='aiida-tools',
@@ -26,10 +28,8 @@ setup(
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
         'Operating System :: Unix',
-        'Programming Language :: Python :: 3',
-        'Programming Language :: Python :: 3.4',
-        'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6',
+        'Framework :: AiiDA',
+        'Programming Language :: Python :: 2.7',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Physics',
         'Development Status :: 3 - Alpha'
