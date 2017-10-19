@@ -5,4 +5,5 @@
 
 __version__ = '0.0.0a1'
 
-from ._input_validator import get_input_validator 
+from ._input_validator import get_input_validator
+from . import workchain_inputs 

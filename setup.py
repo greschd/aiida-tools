@@ -23,7 +23,10 @@ setup(
     author='Dominik Gresch',
     author_email='greschd@gmx.ch',
     description=readme,
-    install_requires=['decorator'],
+    install_requires=['fsc.export'],
+    extras_require={
+        ':python_version < "3"': ['singledispatch'],
+    }
     classifiers=[
         'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
         'Natural Language :: English',
