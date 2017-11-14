@@ -1,3 +1,7 @@
+"""
+Contains default keyword arguments to pass classes as input to workchains.
+"""
+
 try:
     from functools import singledispatch
 except ImportError:
@@ -29,7 +33,7 @@ def _(cls_name):
 def load_class(cls_name):
     return plum.util.load_class(cls_name.value)
 
-
+#: Keyword arguments to be passed to ``spec.input`` for serializing an input which is a class / workchain into a string.
 WORKCHAIN_INPUT_KWARGS = {
     'valid_type': Str,
     'serialize_fct': get_fullname,

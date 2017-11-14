@@ -3,6 +3,25 @@ from aiida.common.exceptions import InputValidationError
 __all__ = ['get_input_validator']
 
 def get_input_validator(inputdict):
+    """
+    Returns a function which validates and returns a given input.
+
+    :param inputdict: Inputs to the calculation.
+    :type inputdict: dict
+
+    Parameters to the returned validator function:
+
+    :param name: Name of the input.
+    :type name: str
+
+    :param valid_types: Valid types for the input value.
+    :type valid_types: type, or tuple(type)
+
+    :param required: Indicates whether the input is required. The default is ``True``.
+    :type required: bool
+
+    :param default: Default value that is returned if the value is not given, and not required.
+    """
     def _validate_input(name, valid_types, required=True, default=None):
         try:
             value = inputdict.pop(name)
