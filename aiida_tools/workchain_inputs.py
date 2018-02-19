@@ -1,4 +1,4 @@
-CLASS_LOADER.load_class"""
+"""
 Contains default keyword arguments to pass classes as input to workchains.
 """
 
