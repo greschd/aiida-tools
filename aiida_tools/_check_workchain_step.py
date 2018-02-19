@@ -1,4 +1,5 @@
 import functools
+import traceback
 
 from fsc.export import export
 
@@ -14,7 +15,7 @@ def check_workchain_step(func):
             return func(self, *args, **kwargs)
         except Exception as e:
             self.report(
-                '{} in {}: {}'.format(type(e).__name__, func.__name__, e)
+                '{} in {}: {}.\nTraceback:\n{}'.format(type(e).__name__, func.__name__, e, traceback.format_exc())
             )
             raise e
 
