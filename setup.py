@@ -23,7 +23,7 @@ setup(
     author='Dominik Gresch',
     author_email='greschd@gmx.ch',
     description=readme,
-    install_requires=['fsc.export', 'yaml'],
+    install_requires=['fsc.export', 'pyyaml'],
     extras_require={
         ':python_version < "3"': ['singledispatch'],
     },

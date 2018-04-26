@@ -8,4 +8,5 @@ Reference
     :imported-members:
     :inherited-members:
 
-.. autodata:: aiida_tools.workchain_inputs.WORKCHAIN_INPUT_KWARGS
+.. automodule:: aiida_tools.workchain_inputs
+    :members:
