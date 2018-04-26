@@ -1,35 +1,32 @@
-# Makefile for Sphinx documentation
+# Minimal makefile for Sphinx documentation
 #
 
 # You can set these variables from the command line.
+SPHINXOPTS    = -n
 SPHINXBUILD   = sphinx-build
-VERSION = $(shell cat ../version.txt | grep -o -E [0-9]+.[0-9]+)
-HTMLBUILDDIR  = ./build/html
+SPHINXPROJ    = aiida-tools
+SOURCEDIR     = source
+BUILDDIR      = build
+TARGETDIR     = /home/greschd/programming/Z2Pack_website/web/aiida-plugins/aiida-tools
 
-# User-friendly check for sphinx-build
-ifeq ($(shell which $(SPHINXBUILD) >/dev/null 2>&1; echo $$?), 1)
-$(error The '$(SPHINXBUILD)' command was not found. Make sure you have Sphinx installed, then set the SPHINXBUILD environment variable to point to the full path of the '$(SPHINXBUILD)' executable. Alternatively you can add the directory with the executable to your PATH. If you don't have Sphinx installed, grab it from http://sphinx-doc.org/)
-endif
-
-# Internal variables.
-ALLSPHINXOPTS   = -n -d $(HTMLBUILDDIR)/doctrees source
-
-.PHONY: all help clean html
-
+.PHONY: all
 all: html
 
+# Put it first so that "make" without argument is like "make help".
+.PHONY: help
 help:
-	@echo "Please use \`make <target>' where <target> is one of"
-	@echo "  html       to make standalone HTML files"
+	@$(SPHINXBUILD) -M help "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
 
-clean:
-	rm -rf $(HTMLBUILDDIR)
-
-html:
-	mkdir -p $(HTMLBUILDDIR)
-	$(SPHINXBUILD) -b html $(ALLSPHINXOPTS) $(HTMLBUILDDIR)
-	@echo
-	@echo "Build finished. The HTML pages are in $(HTMLBUILDDIR)."
-
+.PHONY: view
 view:
-	xdg-open $(HTMLBUILDDIR)/index.html
+	xdg-open "$(BUILDDIR)"/html/index.html
+
+move:
+	-rm -r $(TARGETDIR)
+	mv $(BUILDDIR)/html $(TARGETDIR)
+
+# Catch-all target: route all unknown targets to Sphinx using the new
+# "make mode" option.  $(O) is meant as a shortcut for $(SPHINXOPTS).
+.PHONY: Makefile
+%: Makefile
+	@$(SPHINXBUILD) -M $@ "$(SOURCEDIR)" "$(BUILDDIR)" $(SPHINXOPTS) $(O)
