@@ -11,9 +11,11 @@ import yaml
 from fsc.export import export
 from aiida.work import ObjectLoader
 
-from aiida.orm.data.base import Str
+from aiida.orm.data.str import Str
 
 __all__ = ['WORKCHAIN_INPUT_KWARGS']
+
+_YAML_IDENTIFIER = '!!YAML!!'
 
 @export
 @singledispatch
@@ -27,7 +29,7 @@ def get_fullname(cls_obj):
     try:
         return Str(ObjectLoader().identify_object(cls_obj))
     except ValueError:
-        return Str(yaml.dump(cls_obj))
+        return Str(_YAML_IDENTIFIER + yaml.dump(cls_obj))
 
 
 @get_fullname.register(str)
@@ -45,8 +47,10 @@ def load_object(cls_name):
     """
     Loads the workchain or workfunction from the serialized string.
     """
-    cls_name_str = cls_name.value
+    cls_name_str = str(cls_name)
     try:
         return ObjectLoader().load_object(cls_name_str)
-    except ValueError:
-        return yaml.load(cls_name_str)
+    except ValueError as err:
+        if cls_name_str.startswith(_YAML_IDENTIFIER):
+            return yaml.load(cls_name_str[len(_YAML_IDENTIFIER):])
+        raise err
