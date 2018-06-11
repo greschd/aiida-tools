@@ -37,7 +37,7 @@ def _(cls_name):
 #: Keyword arguments to be passed to ``spec.input`` for serializing an input which is a class / workchain into a string.
 WORKCHAIN_INPUT_KWARGS = {
     'valid_type': Str,
-    'serialize_fct': get_fullname,
+    'serializer': get_fullname,
 }
 
 @export
