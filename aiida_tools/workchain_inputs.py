@@ -9,7 +9,7 @@ except ImportError:
 
 import yaml
 from fsc.export import export
-from aiida.work.class_loader import CLASS_LOADER
+from aiida.work import ObjectLoader
 
 from aiida.orm.data.base import Str
 
@@ -25,7 +25,7 @@ def get_fullname(cls_obj):
     :type cls_obj: WorkChain, workfunction
     """
     try:
-        return Str(CLASS_LOADER.class_identifier(cls_obj))
+        return Str(ObjectLoader().identify_object(cls_obj))
     except ValueError:
         return Str(yaml.dump(cls_obj))
 
@@ -47,6 +47,6 @@ def load_object(cls_name):
     """
     cls_name_str = cls_name.value
     try:
-        return CLASS_LOADER.load_class(cls_name_str)
+        return ObjectLoader().load_object(cls_name_str)
     except ValueError:
         return yaml.load(cls_name_str)
