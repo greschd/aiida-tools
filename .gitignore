@@ -23,6 +23,7 @@ files*.txt
 
 # pytest
 .cache/v/cache
+.pytest_cache
 tests/.cache
 htmlcov
 tests/.coverage
