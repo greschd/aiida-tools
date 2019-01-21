@@ -19,7 +19,7 @@ with open('./aiida_tools/__init__.py') as f:
 setup(
     name='aiida-tools',
     version=version,
-    url='http://z2pack.ethz.ch/aiida-tools',
+    url='https://aiida-tools.readthedocs.io',
     author='Dominik Gresch',
     author_email='greschd@gmx.ch',
     description=readme,
