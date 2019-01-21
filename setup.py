@@ -38,6 +38,6 @@ setup(
         'Topic :: Scientific/Engineering :: Physics',
         'Development Status :: 3 - Alpha'
     ],
-    license='GPL',
+    license='Apache 2.0',
     packages=['aiida_tools']
 )

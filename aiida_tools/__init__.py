@@ -7,7 +7,7 @@
 This module contains general helper functions to aid in developing AiiDA calculations and workchains.
 """
 
-__version__ = '0.1.0'
+__version__ = '0.1.1'
 
 from ._input_validator import get_input_validator
 from ._check_workchain_step import *
