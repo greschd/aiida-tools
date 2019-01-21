@@ -1,14 +1,14 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
-#
-# Author:  Dominik Gresch <greschd@gmx.ch>
-# Date:    20.10.2014 11:27:40 CEST
-# File:    setup.py
+
+# © 2017-2019, ETH Zurich, Institut für Theoretische Physik
+# Author: Dominik Gresch <greschd@gmx.ch>
+
 
 import re
 from setuptools import setup
 
-readme = """Helper tools for AiiDA."""
+readme = """Helper tools for developing AiiDA plugins."""
 
 # Get the version number
 with open('./aiida_tools/__init__.py') as f:
@@ -28,11 +28,12 @@ setup(
         ':python_version < "3"': ['singledispatch'],
     },
     classifiers=[
-        'License :: OSI Approved :: GNU General Public License v3 (GPLv3)',
+        'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',
         'Operating System :: Unix',
         'Framework :: AiiDA',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3.6',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Physics',
         'Development Status :: 3 - Alpha'

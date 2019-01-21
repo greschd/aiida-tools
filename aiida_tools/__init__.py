@@ -1,3 +1,8 @@
+# -*- coding: utf-8 -*-
+
+# © 2017-2019, ETH Zurich, Institut für Theoretische Physik
+# Author: Dominik Gresch <greschd@gmx.ch>
+
 """
 This module contains general helper functions to aid in developing AiiDA calculations and workchains.
 """
