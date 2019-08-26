@@ -4,7 +4,7 @@
 # Author: Dominik Gresch <greschd@gmx.ch>
 
 
-from aiida.common.exceptions import InputValidationError
+from aiida.common import InputValidationError
 
 __all__ = ['get_input_validator']
 
