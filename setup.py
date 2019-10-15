@@ -23,7 +23,7 @@ setup(
     author='Dominik Gresch',
     author_email='greschd@gmx.ch',
     description=readme,
-    install_requires=['aiida-core', 'fsc.export', 'pyyaml'],
+    install_requires=['aiida-core>=1.0.0<2.0.0', 'fsc.export', 'pyyaml'],
     extras_require={
         ':python_version < "3"': ['singledispatch'],
         'doc': ['sphinx', 'sphinx-rtd-theme'],
