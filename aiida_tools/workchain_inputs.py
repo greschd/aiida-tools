@@ -15,9 +15,9 @@ except ImportError:
 
 import yaml
 from fsc.export import export
-from aiida.work import ObjectLoader
 
-from aiida.orm.data.str import Str
+from aiida.orm import Str
+from aiida.engine.persistence import ObjectLoader
 
 __all__ = ['WORKCHAIN_INPUT_KWARGS']
 
