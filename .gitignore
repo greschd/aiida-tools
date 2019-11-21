@@ -27,3 +27,6 @@ files*.txt
 tests/.cache
 htmlcov
 tests/.coverage
+
+# Editor related
+.vscode
