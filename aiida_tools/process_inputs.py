@@ -19,7 +19,7 @@ from fsc.export import export
 from aiida.orm import Str
 from aiida.engine.persistence import ObjectLoader
 
-__all__ = ['WORKCHAIN_INPUT_KWARGS']
+__all__ = ['PROCESS_INPUT_KWARGS']
 
 _YAML_IDENTIFIER = '!!YAML!!'
 
@@ -27,10 +27,10 @@ _YAML_IDENTIFIER = '!!YAML!!'
 @singledispatch
 def get_fullname(cls_obj):
     """
-    Serializes an AiiDA workchain or workfunction to an AiiDA String. For workchains the class identifier is used, workfunctions are serialized in YAML format.
+    Serializes an AiiDA process class / function to an AiiDA String.
 
     :param cls_obj: Object to be serialized
-    :type cls_obj: WorkChain, workfunction
+    :type cls_obj: Process
     """
     try:
         return Str(ObjectLoader().identify_object(cls_obj))
@@ -42,8 +42,8 @@ def get_fullname(cls_obj):
 def _(cls_name):
     return Str(cls_name)
 
-#: Keyword arguments to be passed to ``spec.input`` for serializing an input which is a class / workchain into a string.
-WORKCHAIN_INPUT_KWARGS = {
+#: Keyword arguments to be passed to ``spec.input`` for serializing an input which is a class / process into a string.
+PROCESS_INPUT_KWARGS = {
     'valid_type': Str,
     'serializer': get_fullname,
 }
@@ -51,7 +51,7 @@ WORKCHAIN_INPUT_KWARGS = {
 @export
 def load_object(cls_name):
     """
-    Loads the workchain or workfunction from the serialized string.
+    Loads the process from the serialized string.
     """
     cls_name_str = str(cls_name)
     try:

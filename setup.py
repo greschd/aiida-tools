@@ -23,6 +23,7 @@ setup(
     author='Dominik Gresch',
     author_email='greschd@gmx.ch',
     description=readme,
+    python_requires=">=3.6",
     install_requires=['aiida-core>=1.0.0<2.0.0', 'fsc.export', 'pyyaml'],
     extras_require={
         ':python_version < "3"': ['singledispatch'],
@@ -32,8 +33,8 @@ setup(
         'License :: OSI Approved :: Apache Software License',
         'Natural Language :: English',
         'Operating System :: Unix',
-        'Programming Language :: Python :: 2.7',
         'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7',
         'Intended Audience :: Science/Research',
         'Topic :: Scientific/Engineering :: Physics',
         'Development Status :: 3 - Alpha'
