@@ -2,8 +2,6 @@
 
 # © 2017-2019, ETH Zurich, Institut für Theoretische Physik
 # Author: Dominik Gresch <greschd@gmx.ch>
-
-
 """
 Contains default keyword arguments to pass classes as input to workchains.
 """
@@ -22,6 +20,7 @@ from aiida.engine.persistence import ObjectLoader
 __all__ = ['PROCESS_INPUT_KWARGS']
 
 _YAML_IDENTIFIER = '!!YAML!!'
+
 
 @export
 @singledispatch
@@ -42,21 +41,26 @@ def get_fullname(cls_obj):
 def _(cls_name):
     return Str(cls_name)
 
+
 #: Keyword arguments to be passed to ``spec.input`` for serializing an input which is a class / process into a string.
 PROCESS_INPUT_KWARGS = {
     'valid_type': Str,
     'serializer': get_fullname,
 }
 
+
 @export
 def load_object(cls_name):
     """
     Loads the process from the serialized string.
     """
-    cls_name_str = str(cls_name)
+    if isinstance(cls_name, Str):
+        cls_name_str = cls_name.value
+    else:
+        cls_name_str = str(cls_name)
     try:
         return ObjectLoader().load_object(cls_name_str)
     except ValueError as err:
         if cls_name_str.startswith(_YAML_IDENTIFIER):
             return yaml.load(cls_name_str[len(_YAML_IDENTIFIER):])
-        raise err
+        raise ValueError(f"Could not load class name '{cls_name_str}'.") from err
