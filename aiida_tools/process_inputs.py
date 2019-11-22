@@ -54,7 +54,10 @@ def load_object(cls_name):
     """
     Loads the process from the serialized string.
     """
-    cls_name_str = str(cls_name)
+    if isinstance(cls_name, Str):
+        cls_name_str = cls_name.value
+    else:
+        cls_name_str = str(cls_name)
     try:
         return ObjectLoader().load_object(cls_name_str)
     except ValueError as err:
