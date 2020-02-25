@@ -11,7 +11,7 @@ from setuptools import setup
 readme = """Helper tools for developing AiiDA plugins."""
 
 # Get the version number
-with open('./aiida_tools/__init__.py') as f:
+with open('./aiida_tools/__init__.py', encoding='utf-8') as f:
     match_expr = "__version__[^'\"]+(['\"])([^'\"]+)"
     version = re.search(match_expr, f.read()).group(2).strip()
 
