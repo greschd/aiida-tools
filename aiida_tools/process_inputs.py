@@ -1,28 +1,21 @@
-# -*- coding: utf-8 -*-
-
 # © 2017-2019, ETH Zurich, Institut für Theoretische Physik
 # Author: Dominik Gresch <greschd@gmx.ch>
 """
 Contains default keyword arguments to pass classes as input to workchains.
 """
 
-try:
-    from functools import singledispatch
-except ImportError:
-    from singledispatch import singledispatch
+from functools import singledispatch
 
 import yaml
-from fsc.export import export
 
 from aiida.orm import Str
 from aiida.engine.persistence import ObjectLoader
 
-__all__ = ['PROCESS_INPUT_KWARGS']
+__all__ = ["PROCESS_INPUT_KWARGS", "get_fullname", "load_object"]
 
-_YAML_IDENTIFIER = '!!YAML!!'
+_YAML_IDENTIFIER = "!!YAML!!"
 
 
-@export
 @singledispatch
 def get_fullname(cls_obj):
     """
@@ -44,12 +37,11 @@ def _(cls_name):
 
 #: Keyword arguments to be passed to ``spec.input`` for serializing an input which is a class / process into a string.
 PROCESS_INPUT_KWARGS = {
-    'valid_type': Str,
-    'serializer': get_fullname,
+    "valid_type": Str,
+    "serializer": get_fullname,
 }
 
 
-@export
 def load_object(cls_name):
     """
     Loads the process from the serialized string.
@@ -62,5 +54,5 @@ def load_object(cls_name):
         return ObjectLoader().load_object(cls_name_str)
     except ValueError as err:
         if cls_name_str.startswith(_YAML_IDENTIFIER):
-            return yaml.load(cls_name_str[len(_YAML_IDENTIFIER):])
+            return yaml.load(cls_name_str[len(_YAML_IDENTIFIER) :])
         raise ValueError(f"Could not load class name '{cls_name_str}'.") from err
