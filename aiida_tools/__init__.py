@@ -4,7 +4,7 @@
 This module contains general helper functions to aid in developing AiiDA calculations and workchains.
 """
 
-__version__ = "0.4.0"
+__version__ = "0.4.1"
 
 from ._get_outputs_dict import *
 from ._check_workchain_step import *
