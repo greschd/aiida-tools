@@ -4,10 +4,9 @@
 import functools
 import traceback
 
-from fsc.export import export
+__all__ = ["check_workchain_step"]
 
 
-@export
 def check_workchain_step(func):
     """
     Decorator for workchain steps that logs (and re-raises) errors occuring within that step.

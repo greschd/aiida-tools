@@ -23,7 +23,7 @@ setup(
     author_email="mail@greschd.ch",
     description=readme,
     python_requires=">=3.7",
-    install_requires=["aiida-core>=2.0.0<3.0.0", "pyyaml"],
+    install_requires=["aiida-core>=1.0.0<3.0.0", "pyyaml"],
     extras_require={"dev": ["sphinx", "sphinx-rtd-theme", "pre-commit"]},
     classifiers=[
         "License :: OSI Approved :: Apache Software License",
